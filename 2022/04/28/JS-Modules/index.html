@@ -15,7 +15,7 @@
 
 
 
-<title>Git Candies | Seek With Me</title>
+<title>JS &#34;Modules&#34; before Modules | Seek With Me</title>
 
 
 
@@ -195,7 +195,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">Git Candies</h1>
+            <h1 class="post-title">JS &#34;Modules&#34; before Modules</h1>
             
                 <div class="post-meta">
                     
@@ -204,7 +204,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">March 25, 2022&nbsp;&nbsp;18:14:12</a>
+                        Date: <a href="#">April 28, 2022&nbsp;&nbsp;17:17:49</a>
                         </span>
                     
                     
@@ -213,13 +213,27 @@
         </header>
 
         <div class="post-content">
-            <h3 id="fatal-refusing-to-merge-unrelated-histories"><a href="#fatal-refusing-to-merge-unrelated-histories" class="headerlink" title="fatal: refusing to merge unrelated histories"></a>fatal: refusing to merge unrelated histories</h3><p>After successfully setting removed repo, I tried to push a local folder to the remoted repo. However, such error appears:</p>
-<blockquote>
-<p><code>fatal: refusing to merge unrelated histories</code>. </p>
-</blockquote>
-<p>Then comes the solution:</p>
-<p><code>git pull origin branchname --allow-unrelated-histories</code>.</p>
-<p>TEST: UPDATE</p>
+            <h3 id="IIFE"><a href="#IIFE" class="headerlink" title="IIFE"></a>IIFE</h3><p>IIFE means “Immediately Invoked Function Expression.” It’s an anonymous function that is called(invoked) when it is declared.</p>
+<p>If a function looks like this, then it is a function declaration:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function()&#123;</span><br><span class="line">	console.log(&#x27;Hej, god morgon&#x27;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>We cannot invoke a function declaration, like this:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function()&#123;</span><br><span class="line">	console.log(&#x27;Hej, god morgon&#x27;)</span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure>
+
+<p>But we can make the function become a function expression by adding a pair of parentheses around it and then invoke it like this:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(function()&#123;</span><br><span class="line">	console.log(&#x27;Hej, god morgon&#x27;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>Specifically, this kind of function expression returns the function itself. So we can immediately invoke it, like this:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(function()&#123;</span><br><span class="line">	console.log(&#x27;Hej, god morgon&#x27;)</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
+<p>We can encapsulate code in a format of IIFE, but we cannot reuse it or make it an actual module.</p>
+<h3 id="Revealing-Module-Pattern"><a href="#Revealing-Module-Pattern" class="headerlink" title="Revealing Module Pattern"></a>Revealing Module Pattern</h3><p>Since we can invoke an anonymous function expression surrounded by parentheses, we can also make a normal function expression and invoke it. But this time, we explicitly make a return inside a function and assign the value to a variable:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var func = function()&#123;</span><br><span class="line">	function sayHello()&#123;</span><br><span class="line">		console.log(&#x27;Hej, god morgon&#x27;)</span><br><span class="line">	&#125;</span><br><span class="line">	return &#123;</span><br><span class="line">		sayHello: sayHello</span><br><span class="line">	&#125;</span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure>
+
+<p>When accessing <code>sayHello</code>:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func.sayHello()</span><br></pre></td></tr></table></figure>
+
+<p>Again, it’s not an actual module.</p>
 
         </div>
 
@@ -234,7 +248,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="https://sandzn.github.io/2022/03/25/git-candies/">https://sandzn.github.io/2022/03/25/git-candies/</a></span>
+                        <span><a href="https://sandzn.github.io/2022/04/28/JS-Modules/">https://sandzn.github.io/2022/04/28/JS-Modules/</a></span>
                     </p>
                 
                 
@@ -258,7 +272,7 @@
                 <span class="tag">
                     
                     
-                        <a href="/tags/git/"># git</a>
+                        <a href="/tags/JavaScript/"># JavaScript</a>
                     
                         
                 </span>
@@ -271,10 +285,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2022/04/28/JS-Modules/">JS "Modules" before Modules</a>
             
-            
-            <a class="next" rel="next" href="/2022/03/25/hello-world/">Hello World</a>
+            <a class="next" rel="next" href="/2022/03/25/git-candies/">Git Candies</a>
             
         </section>
 
