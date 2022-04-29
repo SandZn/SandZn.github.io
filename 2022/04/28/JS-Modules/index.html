@@ -15,7 +15,7 @@
 
 
 
-<title>JS &#34;Modules&#34; before Modules | Seek With Me</title>
+<title>JS &#34;Modules&#34; | Seek With Me</title>
 
 
 
@@ -195,7 +195,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">JS &#34;Modules&#34; before Modules</h1>
+            <h1 class="post-title">JS &#34;Modules&#34;</h1>
             
                 <div class="post-meta">
                     
@@ -234,6 +234,23 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func.sayHello()</span><br></pre></td></tr></table></figure>
 
 <p>Again, it’s not an actual module.</p>
+<h3 id="Differences-between-CommonJS-and-ES6-Module"><a href="#Differences-between-CommonJS-and-ES6-Module" class="headerlink" title="Differences between CommonJS and ES6 Module"></a>Differences between CommonJS and ES6 Module</h3><p>Apart from the difference in usage, what are the other differences we may ignore?</p>
+<h5 id="outputs"><a href="#outputs" class="headerlink" title="outputs"></a>outputs</h5><p>The CommonJS module outputs a copy of a value, while ES6 module outputs a reference to a value.</p>
+<p>CommonJS module will cache the value.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// CommonJS, lib.js</span></span><br><span class="line"><span class="keyword">const</span> counter = <span class="number">1</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">incCounter</span> = (<span class="params"></span>) =&gt; counter++</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  counter,</span><br><span class="line">  incCounter</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// CommonJS, main.js</span></span><br><span class="line"><span class="keyword">const</span> lib = <span class="built_in">require</span>(<span class="string">&#x27;./lib&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(lib.<span class="property">counter</span>) <span class="comment">// 1</span></span><br><span class="line">lib.<span class="title function_">incCounter</span>()</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(lib.<span class="property">counter</span>) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// ES6 module, lib.js</span><br><span class="line">export let counter = 1</span><br><span class="line">export function incCounter() &#123;</span><br><span class="line">	counter++</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// ES6 module, main.js</span><br><span class="line">import &#123;counter, incCounter&#125; from &#x27;./lib&#x27;</span><br><span class="line">console.log(counter) // 1</span><br><span class="line">incCounter()</span><br><span class="line">console.log(counter) // 2</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="the-loading-time-of-values"><a href="#the-loading-time-of-values" class="headerlink" title="the loading time of values"></a>the loading time of values</h5><p>In CommonJS values are loaded at runtime, while in ES6 module, values are loaded at compile time.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// CommonJS </span></span><br><span class="line"><span class="keyword">let</span> &#123;func1, func2&#125; = <span class="built_in">require</span>(<span class="string">&#x27;./lib&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// is equivalent to</span></span><br><span class="line"><span class="keyword">let</span> _lib = <span class="built_in">require</span>(<span class="string">&#x27;./lib&#x27;</span>)</span><br><span class="line"><span class="keyword">let</span> func1 = _lib.<span class="property">func1</span></span><br><span class="line"><span class="keyword">let</span> func2 = _lib.<span class="property">func2</span></span><br></pre></td></tr></table></figure>
+
+<p>CommonJS generate an object for the “lib” and load it as a whole.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ES6 module</span></span><br><span class="line"><span class="keyword">import</span> &#123; func1, func2 &#125; <span class="keyword">from</span> <span class="string">&#x27;./lib&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>ES6 module only loads <code>func1</code>, <code>func2</code> at compile time, ignoring the other functions in <code>lib</code></p>
+<h3 id="execution-methods"><a href="#execution-methods" class="headerlink" title="execution methods"></a>execution methods</h3><p>In CommonJS, require()  is loaded synchronously, while in ES6 module, import is loaded asynchronously.</p>
 
         </div>
 
