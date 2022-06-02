@@ -15,7 +15,7 @@
 
 
 
-<title>Hello World | Seek With Me</title>
+<title>Modify git author and email (after committing) | Seek With Me</title>
 
 
 
@@ -195,7 +195,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">Hello World</h1>
+            <h1 class="post-title">Modify git author and email (after committing)</h1>
             
                 <div class="post-meta">
                     
@@ -204,7 +204,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">March 25, 2022&nbsp;&nbsp;16:56:56</a>
+                        Date: <a href="#">June 2, 2022&nbsp;&nbsp;15:26:49</a>
                         </span>
                     
                     
@@ -213,19 +213,36 @@
         </header>
 
         <div class="post-content">
-            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+            <blockquote>
+<p>Here is the story: </p>
+<p>I developed my project locally on my new laptop without modifying the git author and email in the new laptop.</p>
+<p>After I pushed my code several times and visited the project website, I found it was not my git account pushing this code.</p>
+<p>So I have to correct the commit information.</p>
+</blockquote>
+<h4 id="Change-your-git-account-locally"><a href="#Change-your-git-account-locally" class="headerlink" title="Change your git account locally"></a>Change your git account locally</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;SandZn&quot;</span><br><span class="line">git config --global user.email &quot;liuyuxin.cpp@gmail.com&quot;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<h4 id="Modify-the-previous-commit-information"><a href="#Modify-the-previous-commit-information" class="headerlink" title="Modify the previous commit information"></a>Modify the previous commit information</h4><ol>
+<li><code>git log</code> to figure out which commits need to be modified</li>
+<li>Copy the <code>sha</code> for the commit, e.g. <em>90a4e8cd69dfbcac6c08a49c2aa043c93cf1d35b</em></li>
+<li><code>git rebase -i 90a4e8cd69dfbcac6c08a49c2aa043c93cf1d35b</code></li>
+<li>replace <code>pick</code> with <code>edit</code></li>
+<li><code>git commit --amend --author=&quot;SandZn &lt;liuyuxin.cpp@icloud.com&gt;&quot; --no-edit</code> Notice here, I only need to modify the author name and email. So I used <code>--no-edit.</code> </li>
+<li><code>git rebase --continue</code></li>
+<li><code>git push --force origin master/main</code></li>
+</ol>
+<p>If you want to modify in bulk, such as to modify the latest 10 commits. </p>
+<ol>
+<li><p>Run <code>git rebase -i HEAD~10</code> instead of a specific  &#96;&#96;git rebase -i 90a4e8cd69dfbcac6c08a49c2aa043c93cf1d35b<code>. Then in the comment, replace every </code>pick<code>(that you want to modify) with </code>edit&#96;,  save, and out. </p>
+</li>
+<li><p><code>git commit --amend --author=&quot;SandZn &lt;liuyuxin.cpp@icloud.com&gt;&quot; --no-edit</code></p>
+</li>
+<li><p><strong>Keep running</strong> <code>git rebase --continue</code> <strong>until</strong> it shows <code>Successfully rebased and updated refs/heads/master.</code></p>
+</li>
+<li><p><code>git push --force origin master/main</code></p>
+</li>
+</ol>
 
         </div>
 
@@ -243,6 +260,10 @@
                 <span>Tag(s):</span>
                 <span class="tag">
                     
+                    
+                        <a href="/tags/git/"># git</a>
+                    
+                        
                 </span>
             </div>
             <div>
@@ -253,8 +274,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2022/03/25/git-candies/">Git Candies</a>
             
+            <a class="next" rel="next" href="/2022/04/28/JS-Modules/">JS "Modules"</a>
             
         </section>
 
