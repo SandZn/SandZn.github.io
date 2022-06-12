@@ -15,7 +15,7 @@
 
 
 
-<title>Modify git author and email (after committing) | Seek With Me</title>
+<title>Steps Required to Develop on Server | Seek With Me</title>
 
 
 
@@ -195,7 +195,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">Modify git author and email (after committing)</h1>
+            <h1 class="post-title">Steps Required to Develop on Server</h1>
             
                 <div class="post-meta">
                     
@@ -204,7 +204,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">June 2, 2022&nbsp;&nbsp;15:26:49</a>
+                        Date: <a href="#">June 12, 2022&nbsp;&nbsp;21:33:30</a>
                         </span>
                     
                     
@@ -213,34 +213,53 @@
         </header>
 
         <div class="post-content">
-            <blockquote>
-<p>Here is the story: </p>
-<p>I developed my project locally on my new laptop without modifying the git author and email in the new laptop.</p>
-<p>After I pushed my code several times and visited the project website, I found it was not my git account pushing this code.</p>
-<p>So I have to correct the commit information.</p>
-</blockquote>
-<h4 id="Change-your-git-account-locally"><a href="#Change-your-git-account-locally" class="headerlink" title="Change your git account locally"></a>Change your git account locally</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;SandZn&quot;</span><br><span class="line">git config --global user.email &quot;liuyuxin.cpp@gmail.com&quot;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="Modify-the-previous-commit-information"><a href="#Modify-the-previous-commit-information" class="headerlink" title="Modify the previous commit information"></a>Modify the previous commit information</h4><ol>
-<li><code>git log</code> to figure out which commits need to be modified</li>
-<li>Copy the <code>sha</code> for the commit, e.g. <em>90a4e8cd69dfbcac6c08a49c2aa043c93cf1d35b</em></li>
-<li><code>git rebase -i 90a4e8cd69dfbcac6c08a49c2aa043c93cf1d35b</code></li>
-<li>replace <code>pick</code> with <code>edit</code></li>
-<li><code>git commit --amend --author=&quot;SandZn &lt;liuyuxin.cpp@icloud.com&gt;&quot; --no-edit</code> Notice here, I only need to modify the author name and email. So I used <code>--no-edit.</code> </li>
-<li><code>git rebase --continue</code></li>
-<li><code>git push --force origin master/main</code></li>
+            <h3 id="Log-in-with-your-KTH-account"><a href="#Log-in-with-your-KTH-account" class="headerlink" title="Log in with your KTH account"></a>Log in with your KTH account</h3><p>Before logging in to the server website, you need to connect it with your KTH account: <a href="mailto:&#x75;&#115;&#x65;&#x72;&#110;&#x61;&#109;&#x65;&#x40;&#x75;&#103;&#46;&#107;&#116;&#x68;&#x2e;&#115;&#101;">&#x75;&#115;&#x65;&#x72;&#110;&#x61;&#109;&#x65;&#x40;&#x75;&#103;&#46;&#107;&#116;&#x68;&#x2e;&#115;&#101;</a>, then the account will jump to the KTH log-in page.</p>
+<h3 id="Create-an-owner-for-you"><a href="#Create-an-owner-for-you" class="headerlink" title="Create an owner for you"></a>Create an owner for you</h3><p><a target="_blank" rel="noopener" href="https://portal.azure.com/#home">https://portal.azure.com/#home</a></p>
+<p>Create an owner.</p>
+<h3 id="Add-resources-to-the-TCS-group"><a href="#Add-resources-to-the-TCS-group" class="headerlink" title="Add resources to the TCS group"></a>Add resources to the TCS group</h3><ol>
+<li>Find the <a target="_blank" rel="noopener" href="https://portal.azure.com/#view/Microsoft_Azure_Marketplace/PlusNewBlade/package~/null/additionalConfig~/null/dontDiscardJourney~/true/selectedMenuItemId~/null/createLanding~/null">TCS group</a></li>
+<li>Create a <a target="_blank" rel="noopener" href="https://portal.azure.com/#create/Microsoft.VirtualMachine-ARM">virtual machine</a> step by step. Generally, you carefully choose the size (or edit the size later), for the other options or input, just fill in the default value till the final step.</li>
+<li>Deal with your ssh key.</li>
 </ol>
-<p>If you want to modify in bulk, such as to modify the latest 10 commits. </p>
+<h3 id="Connect-to-server"><a href="#Connect-to-server" class="headerlink" title="Connect to server"></a>Connect to server</h3><p>After successfully creating your virtual machine on the server, you can connect to the server with the command:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -i ~/.ssh/liu-js-variants_key.pem liu-yuxin@20.224.37.140</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Handle-your-disk"><a href="#Handle-your-disk" class="headerlink" title="Handle your disk"></a>Handle your disk</h3><ol>
+<li><p>Refer to this <a target="_blank" rel="noopener" href="https://blog.gluckzhang.com/archives/191/">article by Long</a> and mount the corresponding disk.</p>
+<p>For me, the corresponding resource is <code>/dev/sda</code> instead of Long’s <code>/dev/sdc</code>.</p>
+</li>
+<li><p>The initial right on the server is <strong>root</strong> which makes it inconvenient for you to execute your commands, you’d better chown your account to the <code>/data</code> folder, use this command: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R liu-yuxin:liu-yuxin ./data</span><br></pre></td></tr></table></figure>
+
+<p>Then mount:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mount /dev/sda1 /data.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Some useful commands: </p>
 <ol>
-<li><p>Run <code>git rebase -i HEAD~10</code> instead of a specific  &#96;&#96;git rebase -i 90a4e8cd69dfbcac6c08a49c2aa043c93cf1d35b<code>. Then in the comment, replace every </code>pick<code>(that you want to modify) with </code>edit&#96;,  save, and out. </p>
+<li><p>If you want to disconnect the server, use <code>exit</code></p>
 </li>
-<li><p><code>git commit --amend --author=&quot;SandZn &lt;liuyuxin.cpp@icloud.com&gt;&quot; --no-edit</code></p>
+<li><p>If you want the command to be un-dependent from the console, add <code>&amp;</code> at the end of your command, like:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup python test_pobs.py -d dataset.json &gt; output.log 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+
+<p>hen you can bravely close your console and let the command run itself on the server.</p>
 </li>
-<li><p><strong>Keep running</strong> <code>git rebase --continue</code> <strong>until</strong> it shows <code>Successfully rebased and updated refs/heads/master.</code></p>
+<li><p>If you want to check about commands when you open a new window on the console, use this command to find all commands (about python) you are running:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps aux | grep python</span><br></pre></td></tr></table></figure>
 </li>
-<li><p><code>git push --force origin master/main</code></p>
+<li><p><code>ls -l</code> to see your resource on the server</p>
+</li>
+</ol>
+</li>
+<li><p>After mounting, you can git clone and develop on the server.</p>
+</li>
+</ol>
+<h3 id="Install-the-necessary-on-the-disk"><a href="#Install-the-necessary-on-the-disk" class="headerlink" title="Install the necessary on the disk"></a>Install the necessary on the disk</h3><ol>
+<li><p>Npm is not installed default, you have to install npm on the server.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br><span class="line"></span><br><span class="line">sudo apt-get install npm</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Running JS can be challenging, I also met the <strong>Nodejs heap</strong> problem. Just handle it with <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/38558989/node-js-heap-out-of-memory">this</a> solution.</p>
 </li>
 </ol>
 
@@ -261,7 +280,7 @@
                 <span class="tag">
                     
                     
-                        <a href="/tags/git/"># git</a>
+                        <a href="/tags/Server/"># Server</a>
                     
                         
                 </span>
@@ -274,10 +293,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2022/06/12/Steps-Required-to-Develop-on-Server/">Steps Required to Develop on Server</a>
             
-            
-            <a class="next" rel="next" href="/2022/04/28/JS-Modules/">JS "Modules"</a>
+            <a class="next" rel="next" href="/2022/06/02/Modify-git-author/">Modify git author and email (after committing)</a>
             
         </section>
 
