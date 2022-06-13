@@ -210,7 +210,7 @@
 
 
 <h3 id="Create-and-Test-your-ssh-step-by-step"><a href="#Create-and-Test-your-ssh-step-by-step" class="headerlink" title="Create and Test your ssh step by step"></a>Create and Test your ssh step by step</h3><p>Just do as <a target="_blank" rel="noopener" href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/checking-for-existing-ssh-keys">git</a> says: Check, Generate, Add and Test.</p>
-<h3 id="Failed-at-“ssh-T-103-105-x74-x40-103-105-x74-104-117-98-46-x63-x6f-109-“"><a href="#Failed-at-“ssh-T-103-105-x74-x40-103-105-x74-104-117-98-46-x63-x6f-109-“" class="headerlink" title="Failed at “ssh -T &#103;&#105;&#x74;&#x40;&#103;&#105;&#x74;&#104;&#117;&#98;&#46;&#x63;&#x6f;&#109;“"></a>Failed at “ssh -T <a href="mailto:&#103;&#105;&#x74;&#x40;&#103;&#105;&#x74;&#104;&#117;&#98;&#46;&#x63;&#x6f;&#109;">&#103;&#105;&#x74;&#x40;&#103;&#105;&#x74;&#104;&#117;&#98;&#46;&#x63;&#x6f;&#109;</a>“</h3><p>The error says:</p>
+<h3 id="Failed-at-“ssh-T-103-x69-x74-64-x67-105-116-x68-x75-98-x2e-x63-111-109-“"><a href="#Failed-at-“ssh-T-103-x69-x74-64-x67-105-116-x68-x75-98-x2e-x63-111-109-“" class="headerlink" title="Failed at “ssh -T &#103;&#x69;&#x74;&#64;&#x67;&#105;&#116;&#x68;&#x75;&#98;&#x2e;&#x63;&#111;&#109;“"></a>Failed at “ssh -T <a href="mailto:&#103;&#x69;&#x74;&#64;&#x67;&#105;&#116;&#x68;&#x75;&#98;&#x2e;&#x63;&#111;&#109;">&#103;&#x69;&#x74;&#64;&#x67;&#105;&#116;&#x68;&#x75;&#98;&#x2e;&#x63;&#111;&#109;</a>“</h3><p>The error says:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/home/liu-yuxin/.ssh/config: line 3: Bad configuration option: usekeychain</span><br><span class="line">/home/liu-yuxin/.ssh/config: terminating, 1 bad configuration options</span><br></pre></td></tr></table></figure>
 
 <p><strong>Create a config file for ssh</strong>: <code>vim ~/.ssh/config</code></p>
@@ -221,6 +221,14 @@
 
 <p>At this time,  you need to add a line into your ssh&#x2F;config file <strong>IgnoreUnknown UseKeychain</strong>:</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Host *</span><br><span class="line">  IgnoreUnknown UseKeychain </span><br><span class="line">  AddKeysToAgent yes</span><br><span class="line">  UseKeychain yes</span><br><span class="line">  IdentityFile ~/.ssh/id_ed25519</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Enter-PIN-for-authenticator"><a href="#Enter-PIN-for-authenticator" class="headerlink" title="Enter PIN for authenticator"></a>Enter PIN for authenticator</h3><p>If you meet this,</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-add -K ~/.ssh/id_rsa</span><br><span class="line">Enter PIN for authenticator:</span><br></pre></td></tr></table></figure>
+
+<p>Remove -K, so instead:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-add ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure>
 
 
 
