@@ -15,7 +15,7 @@
 
 
 
-<title>Issues fixed in Server Environment | Seek With Me</title>
+<title>Remote-SSH in VSCode on Mac | Seek With Me</title>
 
 
 
@@ -183,7 +183,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">Issues fixed in Server Environment</h1>
+            <h1 class="post-title">Remote-SSH in VSCode on Mac</h1>
             
                 <div class="post-meta">
                     
@@ -192,7 +192,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">June 13, 2022&nbsp;&nbsp;17:20:25</a>
+                        Date: <a href="#">June 16, 2022&nbsp;&nbsp;17:28:41</a>
                         </span>
                     
                     
@@ -202,34 +202,21 @@
 
         <div class="post-content">
             <blockquote>
-<p>Server Environment:</p>
-<p>Ubuntu</p>
+<p>After successfully logging into the remote <a href="https://sandzn.github.io/2022/06/13/Connect-SSH-to-Git/">server with <strong>ssh</strong></a> and being able to perform <code>git pull</code> and <code>git push</code> operations, we continue to make it more convenient to develop in VSCode instead of modifying code in the terminal.</p>
 </blockquote>
-<h3 id="Shell-Bad-substitution"><a href="#Shell-Bad-substitution" class="headerlink" title="Shell: Bad substitution"></a>Shell: Bad substitution</h3><p>Initially, the shell can not read the code:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash">&#123;rows:0-5&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Install-the-remote-ssh-plugin-in-VSCode"><a href="#Install-the-remote-ssh-plugin-in-VSCode" class="headerlink" title="Install the remote-ssh plugin in VSCode"></a>Install the remote-ssh plugin in VSCode</h3><p>Just find the plugin in VSCode.</p>
+<h3 id="Generate-ssh-key"><a href="#Generate-ssh-key" class="headerlink" title="Generate ssh key"></a>Generate ssh key</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.ssh</span><br><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure>
 
-<p>The reason comes from shell interpreter: <strong>bash</strong> or <strong>dash</strong>.</p>
-<ol>
-<li><p>Check which interpreter your <code>/bin/sh</code> refers to:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls /bin/sh -al</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Then you may see your <code>/bin/sh</code> refers to <strong>dash</strong>.</p>
-</li>
-<li><p>Modify the reference to bash:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -fs /bin/bash /bin/sh</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Then your shell script can run successfully.</p>
-</li>
-</ol>
-<h3 id="Issues-occur-because-of-the-low-version-of-Node"><a href="#Issues-occur-because-of-the-low-version-of-Node" class="headerlink" title="Issues occur because of the low version of Node"></a>Issues occur because of the low version of Node</h3><p>![Screenshot 2022-06-13 at 17.35.10](&#x2F;Users&#x2F;yuxinliu&#x2F;Desktop&#x2F;Screenshot 2022-06-13 at 17.35.10.png)</p>
-<p>This issue is not because of <code>npm clean</code> or <code>rm -rf package-lock.json</code> or <code>rm -rf node_modules</code>.</p>
-<p>If <code>npm run test</code> (or other npm scripts) failed again and again, you need to <strong>check your npm version or Node version</strong>:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm --version</span><br><span class="line">node --version</span><br></pre></td></tr></table></figure>
+<p>Press <strong>Enter</strong> until you managed to create the <code>id_rsa.pub</code>.</p>
+<img src="/Users/yuxinliu/Desktop/Screenshot 2022-06-17 at 15.56.56.png" alt="Screenshot 2022-06-17 at 15.56.56" style="zoom:50%;" />
 
-<p> If the versions are too low, you need to update them.</p>
-<p>Here is the strongest way to update Node. After trying different other ways, I find this approach can finally work:</p>
- <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -</span><br><span class="line">sudo apt-get install -y nodejs</span><br></pre></td></tr></table></figure>
 
+
+<h3 id="Copy-the-key-to-the-remote-server"><a href="#Copy-the-key-to-the-remote-server" class="headerlink" title="Copy the key to the remote server"></a>Copy the key to the remote server</h3><p>I tried several ways using commands to copy <code>id_rsa.pub</code> to the remote server but failed. So I just copy and paste manually: After copying the local id_rsa.pub, I logged in to the server, edited the original <code>id_rsa.pub</code> on the server, and then replaced the original content with the copied content.</p>
+<h3 id="Configure-your-ssh-config"><a href="#Configure-your-ssh-config" class="headerlink" title="Configure your ssh config"></a>Configure your ssh config</h3><p>Click the “setting” icon, and edit the &#x2F;.ssh&#x2F;config file.</p>
+<p>![image-20220617154518288](&#x2F;Users&#x2F;yuxinliu&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20220617154518288.png)</p>
+<p>![Screenshot 2022-06-17 at 15.44.25](&#x2F;Users&#x2F;yuxinliu&#x2F;Desktop&#x2F;Screenshot 2022-06-17 at 15.44.25.png)</p>
+<p>Now, you are supposed to be able to develop “locally” in VSCode.</p>
 
         </div>
 
@@ -248,7 +235,7 @@
                 <span class="tag">
                     
                     
-                        <a href="/tags/npm/"># npm</a>
+                        <a href="/tags/vscode-ssh-server/"># vscode, ssh, server</a>
                     
                         
                 </span>
@@ -261,10 +248,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2022/06/16/Remote-SSH-in-VSCode-on-Mac/">Remote-SSH in VSCode on Mac</a>
             
-            
-            <a class="next" rel="next" href="/2022/06/13/Connect-SSH-to-Git/">Connect SSH to Git</a>
+            <a class="next" rel="next" href="/2022/06/13/Issues-fixed-in-Server-Environment/">Issues fixed in Server Environment</a>
             
         </section>
 
