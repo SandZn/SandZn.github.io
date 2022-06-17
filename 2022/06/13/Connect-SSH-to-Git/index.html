@@ -202,15 +202,14 @@
 
         <div class="post-content">
             <blockquote>
-<p>First “git push” failed from the remote server, which means you need to config ssh on the server.</p>
+<p>First, “git push” failed from the remote server, which means you need to config ssh on the server.</p>
 </blockquote>
-<p>![Screenshot 2022-06-13 at 11.10.41](&#x2F;Users&#x2F;yuxinliu&#x2F;Desktop&#x2F;Screenshot 2022-06-13 at 11.10.41.png)</p>
 <h3 id="Git-Config"><a href="#Git-Config" class="headerlink" title="Git Config"></a>Git Config</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;userName&quot;</span><br><span class="line">git config --global user.email &quot;userEmail&quot;</span><br></pre></td></tr></table></figure>
 
 
 
 <h3 id="Create-and-Test-your-ssh-step-by-step"><a href="#Create-and-Test-your-ssh-step-by-step" class="headerlink" title="Create and Test your ssh step by step"></a>Create and Test your ssh step by step</h3><p>Just do as <a target="_blank" rel="noopener" href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/checking-for-existing-ssh-keys">git</a> says: Check, Generate, Add and Test.</p>
-<h3 id="Failed-at-“ssh-T-x67-x69-x74-64-103-x69-116-104-117-98-x2e-99-x6f-109-“"><a href="#Failed-at-“ssh-T-x67-x69-x74-64-103-x69-116-104-117-98-x2e-99-x6f-109-“" class="headerlink" title="Failed at “ssh -T &#x67;&#x69;&#x74;&#64;&#103;&#x69;&#116;&#104;&#117;&#98;&#x2e;&#99;&#x6f;&#109;“"></a>Failed at “ssh -T <a href="mailto:&#x67;&#x69;&#x74;&#64;&#103;&#x69;&#116;&#104;&#117;&#98;&#x2e;&#99;&#x6f;&#109;">&#x67;&#x69;&#x74;&#64;&#103;&#x69;&#116;&#104;&#117;&#98;&#x2e;&#99;&#x6f;&#109;</a>“</h3><p>The error says:</p>
+<h3 id="Failed-at-“ssh-T-103-x69-x74-64-103-105-116-104-117-98-46-x63-x6f-109-“"><a href="#Failed-at-“ssh-T-103-x69-x74-64-103-105-116-104-117-98-46-x63-x6f-109-“" class="headerlink" title="Failed at “ssh -T &#103;&#x69;&#x74;&#64;&#103;&#105;&#116;&#104;&#117;&#98;&#46;&#x63;&#x6f;&#109;“"></a>Failed at “ssh -T <a href="mailto:&#103;&#x69;&#x74;&#64;&#103;&#105;&#116;&#104;&#117;&#98;&#46;&#x63;&#x6f;&#109;">&#103;&#x69;&#x74;&#64;&#103;&#105;&#116;&#104;&#117;&#98;&#46;&#x63;&#x6f;&#109;</a>“</h3><p>The error says:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/home/liu-yuxin/.ssh/config: line 3: Bad configuration option: usekeychain</span><br><span class="line">/home/liu-yuxin/.ssh/config: terminating, 1 bad configuration options</span><br></pre></td></tr></table></figure>
 
 <p><strong>Create a config file for ssh</strong>: <code>vim ~/.ssh/config</code></p>
@@ -232,13 +231,13 @@
 
 
 
-<h3 id="Set-URL-to-repo"><a href="#Set-URL-to-repo" class="headerlink" title="Set URL to repo"></a>Set URL to repo</h3><p>If <code>git push</code> still doesn’t work, try to set the URL to the repo:</p>
-<p>**Notice: The URL here is the SSH option when you’ wanna clone the git URL. ** (There are 3 in total: HTTPS, SSH, GitHub CLI)</p>
+<h3 id="Set-URL-to-repo"><a href="#Set-URL-to-repo" class="headerlink" title="Set URL to repo"></a>Set URL to repo</h3><p>If <code>git push</code> still doesn’t work, try to set the URL to the repo; there are 3 types of URLs in total: HTTPS, SSH, GitHub CLI.:</p>
+<p><strong>Notice: The URL here is the SSH option when you want to clone the git URL.</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote set-url origin git@github.com:&#123;repo&#125;/&#123;project&#125;.git</span><br></pre></td></tr></table></figure>
 
 
 
-<p>Now it would success!</p>
+<p>Now it would be a success!</p>
 
         </div>
 

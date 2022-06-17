@@ -208,14 +208,14 @@
 <h3 id="Generate-ssh-key"><a href="#Generate-ssh-key" class="headerlink" title="Generate ssh key"></a>Generate ssh key</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.ssh</span><br><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure>
 
 <p>Press <strong>Enter</strong> until you managed to create the <code>id_rsa.pub</code>.</p>
-<img src="/Users/yuxinliu/Desktop/Screenshot 2022-06-17 at 15.56.56.png" alt="Screenshot 2022-06-17 at 15.56.56" style="zoom:50%;" />
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">yuxinliu@liuyuxins-MacBook-Pro .ssh % ssh-keygen</span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (/Users/yuxinliu/.ssh/id_rsa): </span><br><span class="line">/Users/yuxinliu/.ssh/id_rsa already exists.</span><br><span class="line">Overwrite (y/n)? y</span><br><span class="line">Enter passphrase (empty for no passphrase): </span><br><span class="line">Enter same passphrase again: </span><br><span class="line">Your identification has been saved in /Users/yuxinliu/.ssh/id_rsa</span><br><span class="line">Your public key has been saved in /Users/yuxinliu/.ssh/id_rsa.pub</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:xNdmzJu8h5rGGJ2LX54jSSounV3vy+yAhsoqeN+hLSE yuxinliu@n140-p223.eduroam.kth.se</span><br><span class="line">The key&#x27;s randomart image is:</span><br><span class="line">+---[RSA 3072]----+</span><br><span class="line">|                 |</span><br><span class="line">|       .   +     |</span><br><span class="line">|        o . *    |</span><br><span class="line">|       . . + o   |</span><br><span class="line">|        S. .+    |</span><br><span class="line">|  E .  ...=  o   |</span><br><span class="line">|.  . ooooO.++ .  |</span><br><span class="line">|o ..o=+o= *Ooo   |</span><br><span class="line">| o.o=++. o++Oo   |</span><br><span class="line">+----[SHA256]-----+</span><br></pre></td></tr></table></figure>
 
 
 
 <h3 id="Copy-the-key-to-the-remote-server"><a href="#Copy-the-key-to-the-remote-server" class="headerlink" title="Copy the key to the remote server"></a>Copy the key to the remote server</h3><p>I tried several ways using commands to copy <code>id_rsa.pub</code> to the remote server but failed. So I just copy and paste manually: After copying the local id_rsa.pub, I logged in to the server, edited the original <code>id_rsa.pub</code> on the server, and then replaced the original content with the copied content.</p>
-<h3 id="Configure-your-ssh-config"><a href="#Configure-your-ssh-config" class="headerlink" title="Configure your ssh config"></a>Configure your ssh config</h3><p>Click the “setting” icon, and edit the &#x2F;.ssh&#x2F;config file.</p>
-<p>![image-20220617154518288](&#x2F;Users&#x2F;yuxinliu&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20220617154518288.png)</p>
-<p>![Screenshot 2022-06-17 at 15.44.25](&#x2F;Users&#x2F;yuxinliu&#x2F;Desktop&#x2F;Screenshot 2022-06-17 at 15.44.25.png)</p>
+<h3 id="Configure-your-ssh-config"><a href="#Configure-your-ssh-config" class="headerlink" title="Configure your ssh config"></a>Configure your ssh config</h3><p>Click the “setting” icon, and edit the <code>/.ssh/config</code> file.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Host 20.224.37.140</span><br><span class="line">    HostName 20.224.37.140</span><br><span class="line">    User liu-yuxin</span><br><span class="line">    Port 22</span><br><span class="line">    IdentityFile ~/.ssh/id_rsa                            </span><br></pre></td></tr></table></figure>
+
 <p>Now, you are supposed to be able to develop “locally” in VSCode.</p>
 
         </div>
@@ -235,7 +235,7 @@
                 <span class="tag">
                     
                     
-                        <a href="/tags/vscode-ssh-server/"># vscode, ssh, server</a>
+                        <a href="/tags/ssh/"># ssh</a>
                     
                         
                 </span>

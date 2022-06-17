@@ -221,9 +221,11 @@
 <li><p>Then your shell script can run successfully.</p>
 </li>
 </ol>
-<h3 id="Issues-occur-because-of-the-low-version-of-Node"><a href="#Issues-occur-because-of-the-low-version-of-Node" class="headerlink" title="Issues occur because of the low version of Node"></a>Issues occur because of the low version of Node</h3><p>![Screenshot 2022-06-13 at 17.35.10](&#x2F;Users&#x2F;yuxinliu&#x2F;Desktop&#x2F;Screenshot 2022-06-13 at 17.35.10.png)</p>
+<h3 id="Issues-occur-because-of-the-low-version-of-Node"><a href="#Issues-occur-because-of-the-low-version-of-Node" class="headerlink" title="Issues occur because of the low version of Node"></a>Issues occur because of the low version of Node</h3><blockquote>
+<p>error: This is probably not a problem with npm. There is likely additional logging output above</p>
+</blockquote>
 <p>This issue is not because of <code>npm clean</code> or <code>rm -rf package-lock.json</code> or <code>rm -rf node_modules</code>.</p>
-<p>If <code>npm run test</code> (or other npm scripts) failed again and again, you need to <strong>check your npm version or Node version</strong>:</p>
+<p>If <code>npm run test</code> (or other npm scripts) failed, again and again, you need to <strong>check your npm version or Node version</strong>:</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm --version</span><br><span class="line">node --version</span><br></pre></td></tr></table></figure>
 
 <p> If the versions are too low, you need to update them.</p>
